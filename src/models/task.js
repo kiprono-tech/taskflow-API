@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 
-// Define a User model
-const Task = mongoose.model('Task', {
+const taskSchema = new mongoose.Schema({
     description: {
         type: String,
         required: true,
@@ -16,6 +15,11 @@ const Task = mongoose.model('Task', {
         required: true,
         ref: 'User'
     }
+}, {
+    timestamps: true
 })
+
+// Define a User model
+const Task = mongoose.model('Task', taskSchema)
 
 module.exports = Task

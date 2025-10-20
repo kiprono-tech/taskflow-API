@@ -1,9 +1,10 @@
 # errorhandler
 
-[![NPM Version][npm-version-image]][npm-url]
-[![NPM Downloads][npm-downloads-image]][npm-url]
+[![NPM Version][npm-image]][npm-url]
+[![NPM Downloads][downloads-image]][downloads-url]
 [![Build Status][travis-image]][travis-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
+[![Gratipay][gratipay-image]][gratipay-url]
 
 Development-only error handler middleware.
 
@@ -25,17 +26,11 @@ for the response between HTML, JSON, and plain text.
 
 ## Install
 
-This is a [Node.js](https://nodejs.org/en/) module available through the
-[npm registry](https://www.npmjs.com/). Installation is done using the
-[`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
-
 ```sh
 $ npm install errorhandler
 ```
 
 ## API
-
-<!-- eslint-disable no-unused-vars -->
 
 ```js
 var errorhandler = require('errorhandler')
@@ -91,8 +86,6 @@ if (process.env.NODE_ENV === 'development') {
 Sometimes you may want to output the errors to a different location than STDERR
 during development, like a system notification, for example.
 
-<!-- eslint-disable handle-callback-err -->
-
 ```js
 var connect = require('connect')
 var errorhandler = require('errorhandler')
@@ -102,10 +95,10 @@ var app = connect()
 
 if (process.env.NODE_ENV === 'development') {
   // only use in development
-  app.use(errorhandler({ log: errorNotification }))
+  app.use(errorhandler({log: errorNotification}))
 }
 
-function errorNotification (err, str, req) {
+function errorNotification(err, str, req) {
   var title = 'Error in ' + req.method + ' ' + req.url
 
   notifier.notify({
@@ -119,10 +112,13 @@ function errorNotification (err, str, req) {
 
 [MIT](LICENSE)
 
-[coveralls-image]: https://badgen.net/coveralls/c/github/expressjs/errorhandler/master
-[coveralls-url]: https://coveralls.io/r/expressjs/errorhandler?branch=master
-[npm-downloads-image]: https://badgen.net/npm/dm/errorhandler
+[npm-image]: https://img.shields.io/npm/v/errorhandler.svg
 [npm-url]: https://npmjs.org/package/errorhandler
-[npm-version-image]: https://badgen.net/npm/v/errorhandler
-[travis-image]: https://badgen.net/travis/expressjs/errorhandler/master
+[travis-image]: https://img.shields.io/travis/expressjs/errorhandler/master.svg
 [travis-url]: https://travis-ci.org/expressjs/errorhandler
+[coveralls-image]: https://img.shields.io/coveralls/expressjs/errorhandler/master.svg
+[coveralls-url]: https://coveralls.io/r/expressjs/errorhandler?branch=master
+[downloads-image]: https://img.shields.io/npm/dm/errorhandler.svg
+[downloads-url]: https://npmjs.org/package/errorhandler
+[gratipay-image]: https://img.shields.io/gratipay/dougwilson.svg
+[gratipay-url]: https://www.gratipay.com/dougwilson/
