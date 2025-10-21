@@ -5,15 +5,16 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "env-cmd -f ./config/dev.env nodemon src/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "@sendgrid/mail": "^8.1.6",
     "bcryptjs": "^3.0.2",
-    "dotenv": "^17.2.3",
+    "env-cmd": "^11.0.0",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongo-express": "^0.30.54",

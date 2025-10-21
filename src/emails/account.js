@@ -1,50 +1,121 @@
 const Sib = require('sib-api-v3-sdk');
-require('dotenv').config();
 
+// Initialize Brevo client
 const client = Sib.ApiClient.instance;
 const apiKey = client.authentications['api-key'];
 apiKey.apiKey = process.env.BREVO_API_KEY;
 
+// Create transactional email API instance
 const tranEmailApi = new Sib.TransactionalEmailsApi();
 
-const sender = {
-    email: 'your_verified_sender@example.com', // must match verified sender in Brevo
-    name: 'Your App or Name',
+// Send welcome email (similar to SendGrid)
+const sendWelcomeEmail = async (email, name) => {
+    try {
+        await tranEmailApi.sendTransacEmail({
+            sender: {
+                email: 'kiprono.tech@gmail.com',  // Must be your verified sender
+                name: 'Vincent from Task Manager',
+            },
+            to: [{ email }], // dynamic recipient
+            subject: 'Welcome to Task Manager!',
+            textContent: `Hi ${name}, welcome to Task Manager.`,
+            htmlContent: `<strong>Hi ${name},</strong><br>Welcome to Task Manager!`,
+        });
+
+        console.log('✅ Welcome email sent successfully!');
+    } catch (error) {
+        console.error('❌ Error sending welcome email:', error);
+    }
 };
 
-const receivers = [{ email: 'recipient@example.com' }];
+// You can create other reusable email functions too
+const sendCancellationEmail = async (email, name) => {
+    try {
+        await tranEmailApi.sendTransacEmail({
+            sender: {
+                email: 'kiprono.tech@gmail.com',
+                name: 'Vincent from Task Manager',
+            },
+            to: [{ email }],
+            subject: 'Sorry to see you go!',
+            textContent: `Goodbye ${name}, your account has been deleted.`,
+            htmlContent: `<strong>Goodbye ${name},</strong><br>Your account has been deleted. We're sorry to see you go.`,
+        });
 
-tranEmailApi
-    .sendTransacEmail({
-        sender,
-        to: receivers,
-        subject: 'Hello from Brevo!',
-        textContent: 'This is a test email using Brevo API.',
-        htmlContent: '<strong>This is a test email using Brevo API.</strong>',
-    })
-    .then(() => console.log('✅ Email sent successfully!'))
-    .catch((error) => console.error('❌ Error:', error));
+        console.log('✅ Cancellation email sent successfully!');
+    } catch (error) {
+        console.error('❌ Error sending cancellation email:', error);
+    }
+};
+
+module.exports = {
+    sendWelcomeEmail,
+    sendCancellationEmail,
+};
 
 
 
 // const sgMail = require('@sendgrid/mail');
 
-// const SENDGRID_API_KEY = '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'
-
 // // Set your API key
-// sgMail.setApiKey(SENDGRID_API_KEY);
+// sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 // // Create your message
-// const msg = {
-//     to: 'recipient@example.com',        // Change to your recipient
-//     from: 'verified-sender@example.com', // Must match your verified sender
-//     subject: 'Hello from SendGrid!',
-//     text: 'This is a test email using SendGrid API.',
-//     html: '<strong>This is a test email using SendGrid API.</strong>',
+// const sendWelcomeEmail = async (email, name) => {
+//     sgMail.send({
+//         to: email,        // Change to your recipient
+//         from: 'kiprono.tech@gmail.com', // Must match your verified sender
+//         subject: `Welcome to Task Manager, ${name}!`,
+//         text: `Hello ${name}, welcome to Task Manager. We're glad to have you.`,
+//         html: `<strong>Hello ${name}, welcome to Task Manager!</strong>`,
+//     })
+
+//     // try {
+//     //     await sgMail.send({
+//     //         to: email, // recipient (user)
+//     //         from: 'kiprono.tech@gmail.com', // verified sender in SendGrid
+//     //         subject: `Welcome to Task Manager, ${name}!`,
+//     //         text: `Hello ${name}, welcome to Task Manager. We're glad to have you.`,
+//     //         html: `<strong>Hello ${name}, welcome to Task Manager!</strong>`,
+//     //     });
+//     //     console.log(`✅ Welcome email sent to ${email}`);
+//     // } catch (error) {
+//     //     console.error('❌ Error sending email:', error);
+//     //     if (error.response) {
+//     //         console.error(error.response.body);
+//     //     }
+//     // }
 // };
 
-// // Send the email
-// sgMail
-//     .send(msg)
-//     .then(() => console.log('✅ Email sent successfully!'))
-//     .catch((error) => console.error('❌ Error:', error));
+// const sendCancellationEmail = async (email, name) => {
+//     sgMail.send({
+//         to: email,        // Change to your recipient
+//         from: 'kiprono.tech@gmail.com', // Must match your verified sender
+//         subject: 'Sorry to see you go!',
+//         text: `Goodbye ${name}, your account has been deleted.`,
+//         html: `<strong>Goodbye ${name},</strong><br>Your account has been deleted. We're sorry to see you go.`,
+//     })
+
+//     // try {
+//     //     await tranEmailApi.sendTransacEmail({
+//     //         sender: {
+//     //             email: 'kiprono.tech@gmail.com',
+//     //             name: 'Vincent from Task Manager',
+//     //         },
+//     //         to: [{ email }],
+//     //         subject: 'Sorry to see you go!',
+//     //         textContent: `Goodbye ${name}, your account has been deleted.`,
+//     //         htmlContent: `<strong>Goodbye ${name},</strong><br>Your account has been deleted. We're sorry to see you go.`,
+//     //     });
+
+//     //     console.log('✅ Cancellation email sent successfully!');
+//     // } catch (error) {
+//     //     console.error('❌ Error sending cancellation email:', error);
+//     // }
+// }
+
+// module.exports = {
+//     sendWelcomeEmail,
+//     sendCancellationEmail
+// }
+
