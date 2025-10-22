@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "env-cmd -f ./config/dev.env nodemon src/index.js"
+    "dev": "env-cmd -f ./config/dev.env nodemon src/index.js",
+    "test": "env-cmd -f ./config/test.env jest --watch"
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "keywords": [],
   "author": "",
@@ -25,5 +29,8 @@
     "sharp": "^0.34.4",
     "sib-api-v3-sdk": "^8.5.0",
     "validator": "^13.15.15"
+  },
+  "devDependencies": {
+    "jest": "^30.2.0"
   }
 }
