@@ -16,6 +16,7 @@ router.post('/users', async (req, res) => {
         const token = await user.generateAuthToken()
         res.status(201).send({ user, token })
     } catch (error) {
+        console.log(error);
         res.status(400).send(error)
     }
 });
@@ -55,27 +56,7 @@ router.post('/users/logoutAll', auth, async (req, res) => {
 
 router.get('/users/profile', auth, async (req, res) => {
     res.send(req.user)
-    // try {
-    //     const users = await User.find({})
-    //     res.status(200).send(users)
-    // } catch (error) {
-    //     res.status(500).send(error);
-    // }
 });
-
-// router.get('/users/:id', async (req, res) => {
-//     const _id = req.params.id
-
-//     try {
-//         const user = await User.findById(_id)
-//         if (!user) {
-//             return res.status(404).send()
-//         }
-//         res.status(200).send(user)
-//     } catch (error) {
-//         res.status(500).send(error);
-//     }
-// });
 
 router.patch('/users/profile', auth, async (req, res) => {
     const Updates = Object.keys(req.body)

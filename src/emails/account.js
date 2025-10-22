@@ -21,8 +21,6 @@ const sendWelcomeEmail = async (email, name) => {
             textContent: `Hi ${name}, welcome to Task Manager.`,
             htmlContent: `<strong>Hi ${name},</strong><br>Welcome to Task Manager!`,
         });
-
-        console.log('✅ Welcome email sent successfully!');
     } catch (error) {
         console.error('❌ Error sending welcome email:', error);
     }
