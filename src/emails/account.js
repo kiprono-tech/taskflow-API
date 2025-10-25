@@ -40,9 +40,12 @@ const sendCancellationEmail = async (email, name) => {
             htmlContent: `<strong>Goodbye ${name},</strong><br>Your account has been deleted. We're sorry to see you go.`,
         });
 
-        console.log('✅ Cancellation email sent successfully!');
+        // console.log('✅ Cancellation email sent successfully!');
     } catch (error) {
-        console.error('❌ Error sending cancellation email:', error);
+        // console.error('❌ Error sending cancellation email:', error);
+        if (process.env.NODE_ENV !== 'test') {
+            console.error('Error sending cancellation email:', error);
+        }
     }
 };
 
