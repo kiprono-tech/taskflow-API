@@ -31,36 +31,41 @@ It’s designed to demonstrate how to build a RESTful API with robust authentica
 ## 🏗️ Project Structure
 
 ```
+Here’s a clean, professional rewrite of your project structure description for **TaskFlow**:
+
+---
+
+### **TaskFlow Project Structure**
 
 TaskFlow/
 │
 ├── src/
-│   ├── app.js               # Express application setup
-│   ├── db/mongoose.js       # MongoDB connection setup
-│   ├── index.js             # Server entry point
+│   ├── app.js                # Main Express application setup
+│   ├── db/
+│   │   └── mongoose.js       # MongoDB connection configuration
+│   ├── index.js              # Server entry point
 │   ├── middleware/
-│   │   └── auth.js          # JWT authentication middleware
+│   │   └── auth.js           # JWT authentication middleware
 │   ├── models/
-│   │   ├── user.js          # User model with tokens, password hashing
-│   │   └── task.js          # Task model linked to users
+│   │   ├── user.js           # User model with token management and password hashing
+│   │   └── task.js           # Task model associated with users
 │   ├── routers/
-│   │   ├── user.js          # Routes for signup, login, profile, etc.
-│   │   └── task.js          # Routes for task CRUD operations
+│   │   ├── user.js           # User routes (signup, login, profile, etc.)
+│   │   └── task.js           # Task routes for CRUD operations
 │   ├── emails/
-│   │   └── account.js       # Brevo email templates (welcome, goodbye)
+│   │   └── account.js        # Brevo email templates (welcome, cancellation, etc.)
 │   └── utils/
-│       └── messages.js      # (optional helper utilities)
+│       └── messages.js       # Optional utility functions
 │
 ├── tests/
-│   ├── fixtures/db.js       # Test database setup
-│   ├── user.test.js         # Jest tests for users
-│   └── task.test.js         # Jest tests for tasks
+│   ├── fixtures/
+│   │   └── db.js             # Test database setup and seeding
+│   ├── user.test.js          # Jest tests for user features
+│   └── task.test.js          # Jest tests for task features
 │
-├── package.json
-├── .env                     # Environment variables
-└── README.md
-
-````
+├── package.json              # Project metadata and dependencies
+├── .env                      # Environment variables
+└── README.md                 # Project documentation
 
 ---
 
